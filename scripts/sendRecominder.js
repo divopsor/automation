@@ -15,7 +15,8 @@ async function sendRecominder() {
 
   if (last.getUTCHours() === now.getUTCHours()) {
     console.log(`${last.toLocaleString('ko-KR', { timeZone: 'UTC' })}`);
-    return 0;
+    await fs.promises.writeFile('RESULT', '0');
+    return;
   }
 
   for (const schedule of schedules) {
@@ -42,7 +43,7 @@ async function sendRecominder() {
     }
   }
 
-  return 1;
+  await fs.promises.writeFile('RESULT', '1');
 }
 
 sendRecominder()
