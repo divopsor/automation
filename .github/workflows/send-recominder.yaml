@@ -2,10 +2,10 @@ name: send-recominder
 
 on:
   schedule:
-    - cron: '0 * * * *' # 매 시간 실행 (1시간마다)
+    - cron: '0,30 * * * *' # 매 시간 실행 (1시간마다)
   push:
     branches:
-      - test
+      - main
 
 jobs:
   send_recominder:
