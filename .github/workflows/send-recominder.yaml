@@ -1,0 +1,28 @@
+name: send-recominder
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 매 시간 실행 (1시간마다)
+  push:
+    branches:
+      - test
+
+jobs:
+  send_recominder:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout 코드
+      uses: actions/checkout@v2
+
+    - name: schedules.json / jobs.json
+      run: |
+        cat schedules.json
+        cat jobs.json
+
+    - name: Node.js로 로직 실행
+      run: |
+        export TELEGRAM_CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
+        export TELEGRAM_ACCESS_TOKEN="${{ secrets.TELEGRAM_ACCESS_TOKEN }}"
+
+        node ./scripts/sendRecominder.js
