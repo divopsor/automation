@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 async function sendRecominder() {
   const jobs = JSON.parse(await fs.promises.readFile(path.join(__dirname, '..', 'jobs.json'), 'utf-8'));
   const schedules = JSON.parse(await fs.promises.readFile(path.join(__dirname, '..', 'schedules.json'), 'utf-8'));
-  const LAST_TRIGGERED_AT = (await fs.promises.readFile(path.join(__dirname, '..', 'LAST_TRIGGERED_AT'))).trim();
+  const LAST_TRIGGERED_AT = (await fs.promises.readFile(path.join(__dirname, '..', 'LAST_TRIGGERED_AT', 'utf-8'))).trim();
 
   const last = new Date(Number(LAST_TRIGGERED_AT));
   const now = new Date();
