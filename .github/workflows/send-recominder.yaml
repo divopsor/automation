@@ -20,6 +20,9 @@ jobs:
         cat schedules.json
         cat jobs.json
 
+    - name: yarn
+      run: yarn
+
     - name: Node.js로 로직 실행
       run: |
         export TELEGRAM_CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
