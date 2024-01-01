@@ -62,5 +62,5 @@ jobs:
             echo "RESULT is not 1. No action needed."
         fi
           
-        env:
-          CRECO_STORAGE: ${{ secrets.CRECO_STORAGE }}
+      env:
+        CRECO_STORAGE: ${{ secrets.CRECO_STORAGE }}
