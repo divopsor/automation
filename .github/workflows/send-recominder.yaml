@@ -30,4 +30,26 @@ jobs:
 
         node ./scripts/sendRecominder.js
         RESULT=$(cat RESULT)
-        echo "RESULT: $RESULT"
+
+        # RESULT 파일의 값을 읽어옴
+        RESULT=$(cat RESULT)
+
+        # RESULT 값이 1인지 확인
+        if [ "$RESULT" -eq 1 ]; then
+            # 현재 timestamp를 생성
+            TIMESTAMP=$(node -p "Date.now()")
+
+            # LAST_TRIGGERED_AT 파일에 현재 timestamp를 씀
+            echo "$TIMESTAMP" > LAST_TRIGGERED_AT
+
+            # 커밋 메시지를 생성
+            COMMIT_MESSAGE="Update LAST_TRIGGERED_AT to $TIMESTAMP"
+
+            # 변경사항을 git에 추가하고 커밋 및 푸시
+            git add LAST_TRIGGERED_AT
+            git commit -m "$COMMIT_MESSAGE"
+            git push origin HEAD  # 또는 다른 브랜치에 맞게 변경
+        else
+            # RESULT 값이 1이 아닌 경우 아무 작업도 하지 않음
+            echo "RESULT is not 1. No action needed."
+        fi
