@@ -1,0 +1,13 @@
+{
+  "name": "automation",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@divopsor:divopsor/automation.git",
+  "author": "divopsor <divopsor@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^2"
+  }
+}
