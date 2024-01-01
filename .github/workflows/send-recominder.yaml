@@ -28,4 +28,6 @@ jobs:
         export TELEGRAM_CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
         export TELEGRAM_ACCESS_TOKEN="${{ secrets.TELEGRAM_ACCESS_TOKEN }}"
 
-        node ./scripts/sendRecominder.js
+        RESULT=$(node -p ./scripts/sendRecominder.js)
+
+        echo "RESULT: $RESULT"

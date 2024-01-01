@@ -10,12 +10,12 @@ async function sendRecominder() {
   const last = new Date(Number(LAST_TRIGGERED_AT));
   const now = new Date();
 
-  console.log(`[now] getHours: ${now.getHours()}`);
-  console.log(`[last] getHours: ${last.getHours()}`);
+  console.log(`[now] getUTCHours: ${now.getUTCHours()}`);
+  console.log(`[last] getUTCHours: ${last.getUTCHours()}`);
 
-  if (last.getHours() === now.getHours()) {
+  if (last.getUTCHours() === now.getUTCHours()) {
     console.log(`${last.toLocaleString('ko-KR', { timeZone: 'UTC' })}`);
-    return;
+    return 0;
   }
 
   for (const schedule of schedules) {
@@ -23,7 +23,7 @@ async function sendRecominder() {
 
     console.log({ jobId, hoursList });
 
-    if (hoursList.some(h => `${h}` === '*' || `${h}` === `${now.getHours()}`)) {
+    if (hoursList.some(h => `${h}` === '*' || `${h}` === `${now.getUTCHours()}`)) {
       const job = jobs.find(j => j.id === jobId);
 
       if (job == null) {
@@ -41,6 +41,8 @@ async function sendRecominder() {
       });
     }
   }
+
+  return 1;
 }
 
 sendRecominder()
