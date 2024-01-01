@@ -1,0 +1,14 @@
+[
+  {
+    "id": "drink-water",
+    "chatIdKey": "TELEGRAM_CHAT_ID",
+    "accessTokenKey": "TELEGRAM_ACCESS_TOKEN",
+    "message": "물 드세요!"
+  },
+  {
+    "id": "wake-up",
+    "chatIdKey": "TELEGRAM_CHAT_ID",
+    "accessTokenKey": "TELEGRAM_ACCESS_TOKEN",
+    "message": "아침 루틴을 위해 일어나세요!"
+  }
+]

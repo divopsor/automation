@@ -1,0 +1,66 @@
+name: send-recominder
+
+on:
+  schedule:
+    - cron: '0,30 * * * *' # 매 시간 실행 (1시간마다)
+  push:
+    branches:
+      - main
+
+jobs:
+  send_recominder:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout 코드
+      uses: actions/checkout@v2
+
+    - name: schedules.json / jobs.json
+      run: |
+        cat schedules.json
+        cat jobs.json
+
+    - name: yarn
+      run: yarn
+
+    - name: Node.js로 로직 실행
+      run: |
+        export TELEGRAM_CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
+        export TELEGRAM_ACCESS_TOKEN="${{ secrets.TELEGRAM_ACCESS_TOKEN }}"
+
+        node ./scripts/sendRecominder.js
+        RESULT=$(cat RESULT)
+
+        # RESULT 파일의 값을 읽어옴
+        RESULT=$(cat RESULT)
+
+        # RESULT 값이 1인지 확인
+        if [ "$RESULT" -eq 1 ]; then
+            # 현재 timestamp를 생성
+            TIMESTAMP=$(node -p "Date.now()")
+
+            # LAST_TRIGGERED_AT 파일에 현재 timestamp를 씀
+            echo "$TIMESTAMP" > LAST_TRIGGERED_AT
+
+            # 커밋 메시지를 생성
+            COMMIT_MESSAGE="[skip ci]Update LAST_TRIGGERED_AT to $TIMESTAMP"
+
+            # 변경사항을 git에 추가하고 커밋 및 푸시
+            git clone https://$CRECO_STORAGE@github.com/divopsor/automation.git
+
+            cd automation
+
+            git config --local user.name "github-actions[bot]"
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            cp ../LAST_TRIGGERED_AT LAST_TRIGGERED_AT
+            git add LAST_TRIGGERED_AT
+            git commit -m "$COMMIT_MESSAGE"
+            git push origin HEAD  # 또는 다른 브랜치에 맞게 변경
+        else
+            # RESULT 값이 1이 아닌 경우 아무 작업도 하지 않음
+            echo "RESULT is not 1. No action needed."
+        fi
+          
+      env:
+        CRECO_STORAGE: ${{ secrets.CRECO_STORAGE }}
