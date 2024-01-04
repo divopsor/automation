@@ -10,5 +10,11 @@
     "chatIdKey": "TELEGRAM_CHAT_ID",
     "accessTokenKey": "TELEGRAM_ACCESS_TOKEN",
     "message": "아침 루틴을 위해 일어나세요!"
+  },
+  {
+    "id": "take-pills",
+    "chatIdKey": "TELEGRAM_CHAT_ID",
+    "accessTokenKey": "TELEGRAM_ACCESS_TOKEN",
+    "message": "건강을 위해 정확한 시간에 약을 먹으세요!"
   }
 ]
