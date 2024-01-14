@@ -9,7 +9,7 @@
     "id": "wake-up",
     "chatIdKey": "TELEGRAM_CHAT_ID",
     "accessTokenKey": "TELEGRAM_ACCESS_TOKEN",
-    "message": "아침 루틴을 위해 일어나세요!"
+    "message": "🚨🚨🚨아침 루틴🚨🚨🚨"
   },
   {
     "id": "take-pills",
